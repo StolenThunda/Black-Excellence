@@ -19,7 +19,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      
+      'axios'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -76,6 +76,9 @@ cfg.module.rules.push({
     devServer: {
       https: false,
       port: 8080,
+      watchOptions: {
+        poll: 1000 // Check for changes every second
+      },
       open: true // opens browser window automatically
     },
 
@@ -98,7 +101,9 @@ cfg.module.rules.push({
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
