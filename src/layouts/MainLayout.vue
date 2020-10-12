@@ -23,8 +23,8 @@
       >
         <q-route-tab name="home" icon="home" label="Home" />
         <q-route-tab name="categories" icon="alarm" label="Categories" />
-        <q-route-tab name="movies" icon="user" label="About" />
-        <q-route-tab name="movies" icon="movie" label="Contact Us" />
+        <q-route-tab name="about" icon="user" label="About" />
+        <q-route-tab name="contact" icon="movie" label="Contact Us" />
       </q-tabs>
     </q-header>
 

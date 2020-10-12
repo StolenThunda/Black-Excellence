@@ -1,8 +1,8 @@
 {
-  "name": "excel",
+  "name": "BlackExcellence",
   "version": "0.0.1",
   "description": "A project dedicated to leveling the playing field",
-  "productName": "b-excel",
+  "productName": "BXL",
   "author": "Antonio Moses",
   "private": true,
   "scripts": {
