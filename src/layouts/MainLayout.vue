@@ -108,6 +108,7 @@ export default {
   components: { EssentialLink },
   data () {
     return {
+      tab: null,
       leftDrawerOpen: false,
       essentialLinks: linksData
     }
