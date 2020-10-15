@@ -27,8 +27,8 @@ export default {
   mounted() {
     this.images = Array(this.count)
       .fill(null)
-      .map((_, i) => "https://lorempixel.com/500/300/technics/" + i);
-    // .map((_, i) => "https://picsum.photos/id/" + i + "/500/300")
+      // .map((_, i) => "https://lorempixel.com/500/300/technics/" + i);
+    .map((_, i) => "https://picsum.photos/id/" + i + "/500/300")
     this.$axios
       .get(
         `https://baconipsum.com/api/?type=meat-and-filler&paras=${this.count}&format=json`

@@ -1,42 +1,81 @@
 <template>
   <q-page class="q-pa-md">
-    <q-carousel
-      v-model="slide"
-      :autoplay="autoplay"
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      @mouseenter="autoplay = false"
-      @mouseleave="autoplay = true"
-      height="80vh"
-      animated
-      infinite
-      arrows
-      navigation
+    <div
+      class="row no-wrap q-gutter-x-sm"
+      style="overflow-x: auto; overflow-y: visible;"
     >
-      <q-carousel-slide
-        v-for="(src, idx) in slides"
-        :key="idx"
-        :name="idx"
-        :img-src="src"
-        class="flex flex-center"
+    <q-card class="q-pa-md" >
+        <q-video
+          :ratio="16 / 9"
+          src="https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"
+        />
+      </q-card>
+      <q-img 
+        v-for="(src, index) in images"
+        :key="index"
+        ref="refThumb"
+        class="cursor-pointer"
+        :class="
+          index === indexZoomed ? 'fixed-top q-mt-md q-mx-auto z-top' : void 0
+        "
+        style="border-radius: 3%/5%; flex: 0 0 10vw"
+        :style="
+          index === indexZoomed ? 'width: 800px; max-width: 70vw' : void 0
+        "
+        :src="src"
+        @click="zoomImage(index)"
       />
-    </q-carousel>
+      
+    </div>
   </q-page>
 </template>
-
 <script>
+import { morph } from "quasar";
+
 export default {
-  name: "Home",
-  data: () => ({
-    slide: 0,
-    autoplay: true,
-    slides: [
-      "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2016/02/RTR2DNV8-1024x672.jpg",
-      "https://altamontenterprise.com/sites/default/files/styles/full/public/2019_07-01_color_diversity_web.jpg?itok=LwPY4ZQ0",
-      "https://media.beam.usnews.com/fe/13/0ba9e8654e8a937cdea0e1d32eff/140905eduteensinschool-stock.jpg",
-      "https://a9p9n2x2.stackpathcdn.com/wp-content/blogs.dir/1/files/2019/08/iStock-1164885358-1080x675.jpg",
-      "https://img.huffingtonpost.com/asset/581392eb150000b900530700.jpg?ops=scalefit_720_noupscale"
-    ]
-  })
+  data() {
+    return {
+      indexZoomed: void 0,
+      images: Array(24)
+        .fill(null)
+        .map((_, i) => "https://picsum.photos/id/" + i + "/500/300")
+    };
+  },
+
+  methods: {
+    zoomImage(index) {
+      const { indexZoomed } = this;
+
+      this.indexZoomed = void 0;
+
+      if (index !== void 0 && index !== indexZoomed) {
+        this.cancel = morph({
+          from: this.$refs.refThumb[index].$el,
+          onToggle: () => {
+            this.indexZoomed = index;
+          },
+          duration: 500,
+          style: "z-index: 1",
+          onEnd: end => {
+            if (end === "from" && this.indexZoomed === index) {
+              this.indexZoomed = void 0;
+            }
+          }
+        });
+      }
+
+      if (
+        indexZoomed !== void 0 &&
+        (this.cancel === void 0 || this.cancel() === false)
+      ) {
+        morph({
+          from: this.$refs.refThumb[indexZoomed].$el,
+          waitFor: 100,
+          duration: 300,
+          style: "z-index: 1"
+        });
+      }
+    }
+  }
 };
 </script>

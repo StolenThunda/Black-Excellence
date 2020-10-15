@@ -86,7 +86,18 @@ cfg.module.rules.push({
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {
+        brand: {
+        primary: '#431c6b',
+        secondary: '#c46506',
+        accent: '#9C27B0',
+        dark: '#310054',
+        positive: '#21BA45',
+        negative: '#C10015',
+        info: '#31CCEC',
+        warning: '#F2C037'
+      }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
